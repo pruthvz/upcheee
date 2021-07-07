@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
 
@@ -15,7 +15,7 @@ const Chat = ({ location }) => {
   const [users, setUsers] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const ENDPOINT = "localhost:5000";
+  const ENDPOINT = "https://upcheee.herokuapp.com/";
   // https://upcheee.herokuapp.com/
 
   useEffect(() => {
@@ -52,17 +52,28 @@ const Chat = ({ location }) => {
     }
   };
   // console.log(message, messages);
+  const el = useRef(null);
+
+  useEffect(() => {
+    el.current.scrollIntoView({ block: "end", behavior: "smooth" });
+  });
 
   return (
-    <div className="outerContainer">
-      <div className="container">
-        <InfoNav room={room} />
-        <Messages messages={messages} />
+    <div>
+      <div>
+        <div>
+          <InfoNav room={room} />
+          <div class="mt-20 mb-20">
+            <Messages messages={messages} name={name} />
+          </div>
+        </div>
+
         <Input
           message={message}
           setMessage={setMessage}
           sendMessage={sendMessage}
         />
+        <div id={"el"} ref={el}></div>
       </div>
     </div>
   );

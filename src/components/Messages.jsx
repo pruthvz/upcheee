@@ -1,10 +1,11 @@
 import React from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import Message from "./Message";
+import "./styles/Chat.css";
 const Messages = ({ messages, name }) => {
   return (
-    <div>
-      <ScrollToBottom className="messages">
+    <div id="scrollHere" className="bg-gray-700">
+      <ScrollToBottom>
         {messages.map((message, i) => (
           <div key={i}>
             <Message message={message} name={name} />
